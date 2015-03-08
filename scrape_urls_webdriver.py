@@ -32,8 +32,7 @@ class Page:
             print soup.prettify()
         self.driver.close()
         self._write_urls_page_list_to_pickle_file(self.page_list)
-
-    
+   
     def _configure(self):
         """Set the browser size and the amount of time we'll wait
         for things to happen.
@@ -62,7 +61,7 @@ class Page:
         return page
 
     def _write_urls_page_list_to_pickle_file(self, page_list):
-        pickle_file_path = os.path.join(self.root_dir, 'url_files', 'url_list.p', )
+        pickle_file_path = os.path.join(self.root_dir, 'url_files', 'page_list.p', )
         pickle.dump( page_list, open( pickle_file_path, 'wb' ) )
 
 

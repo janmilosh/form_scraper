@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from source_pages.models import SourcePage
+
+admin.site.register(SourcePage)

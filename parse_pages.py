@@ -11,11 +11,14 @@ class Parse:
         self.root_dir = os.getcwd()
         
     def main(self):
-        pickle_path = os.path.join(self.root_dir, 'url_files', 'url_list.p')
+        pickle_path = os.path.join(self.root_dir, 'url_files', 'page_list.p')
         pages_list = pickle.load( open(pickle_path, 'rb') )
-        self._create_url_dict(pages_list)
+        url_list = self._create_url_list(pages_list)
+        self._write_url_list_to_pickle_file(url_list)
 
-    def _create_url_dict(selfl, pages_list):
+    def _create_url_list(selfl, pages_list):
+        '''Use beautiful soup to clean up the pages and extract
+        all of the links and labels'''
         links = []
         labels = []
 
@@ -43,9 +46,15 @@ class Parse:
                 title = elem['title']
                 if title:
                     labels.append(title)
-        
-        url_dict = dict(zip(labels, links))
-        pprint.pprint(url_dict)
+
+        url_list = []
+        for index, link in enumerate(links):
+            url_list.append([labels[index], links[index]])
+        return url_list
+
+    def _write_url_list_to_pickle_file(self, page_list):
+        pickle_file_path = os.path.join(self.root_dir, 'url_files', 'url_list.p', )
+        pickle.dump( page_list, open( pickle_file_path, 'wb' ) )
 
 
 if __name__ == '__main__':
