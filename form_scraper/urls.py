@@ -1,10 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'form_scraper.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
+urlpatterns = patterns('',
+    url(r'^pages/', include('source_pages.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

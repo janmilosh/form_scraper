@@ -1,0 +1,13 @@
+{% if pages %}
+  <table>
+    <tbody>
+    {% for page in pages %}    
+      <tr>
+        <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No pages are available.</p>
+{% endif %}

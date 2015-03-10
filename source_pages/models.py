@@ -7,8 +7,8 @@ class SourcePage(models.Model):
     previous_site_url = models.CharField('previous site url',
                                          max_length=300,
                                          blank=True)
-    scraper_filename = models.CharField('scraper filename',
-                                        max_length = 32,
+    base_url = models.CharField('base url',
+                                        max_length = 128,
                                         blank=True)
     timestamp = models.DateTimeField('date added')
 
