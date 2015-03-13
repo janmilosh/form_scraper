@@ -3,35 +3,24 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 
 from source_pages.models import SourcePage
+from source_pages.scrape.source import PageRequests
 
-
-def detail(request, page_id):
-    return HttpResponse("You're looking at page %s." % page_id)
 
 def index(request):
     pages = SourcePage.objects.order_by('site_title')
-    template = loader.get_template('index.html')
-    context = RequestContext(request, {
-        'pages': pages,
-    })
-    return HttpResponse(template.render(context))
-
-def update_page_request_data():
-    pages = SourcePage.objects.all()
-    for page in pages:
-        response = page.request_source_page()
-        page.status_code = response['status_code']
-        page.error_message = response['error_message']
-        page.save()
+    return render(request, 'index.html',
+            {'pages': pages,
+             'number': len(pages)})
 
 def get_pages(request):
-    print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    page_requests = PageRequests()
     if(request.GET.get('start_requests')):
-        
-        update_page_request_data()
-    template = loader.get_template('request_pages.html')
-    context = RequestContext(request)
-    return HttpResponse(template.render(context))
+        page_requests.update_page_request_data()
+        return render(request, 'request_pages.html')
 
-
-
+def error_pages(request):
+    error_pages = SourcePage.objects.exclude(status_code=200)
+    number = len(error_pages)
+    return render(request, 'error_pages.html',
+            {'error_pages': error_pages,
+             'number': number})
