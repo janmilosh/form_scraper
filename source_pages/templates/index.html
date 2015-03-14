@@ -3,19 +3,17 @@
   <table>
     <head>
       <tr>
-        <td>Site Title</td>
+        <td>Site Title/URL</td>
         <td>Status Code</td>
-        <td>Notes</td>
-        <td>Site URL</a></td>
       </tr>
     </head>
     <tbody>
-      
-      {% for page in pages %}    
+      {% for page in pages %}  
         <tr>
           <td>{{ page.site_title }}</td>
           <td>{{ page.status_code }}</td>
-          <td>{{ page.notes }}</td>
+        </tr>
+        <tr>
           <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
         </tr>
       {% endfor %}

@@ -16,12 +16,18 @@ class PageRequests:
     def request_source_page(self, page):
         try:
             response = requests.get(page.site_url)
+            print response.status_code, page.site_url
             return {'status_code': response.status_code,
                     'error_message': ''}
         
         except BaseException, e:
+            print page.site_url, e
             return {'status_code': None,
                     'error_message': e}
 
     def write_to_csv(self):
         pass
+
+def run():
+    pr = PageRequests()
+    pr.update_page_request_data()
