@@ -15,7 +15,7 @@ class PageRequests:
 
     def request_source_page(self, page):
         try:
-            response = requests.get(page.site_url)
+            response = requests.head(page.site_url)
             print response.status_code, page.site_url
             return {'status_code': response.status_code,
                     'error_message': ''}

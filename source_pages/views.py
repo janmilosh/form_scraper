@@ -12,7 +12,11 @@ def index(request):
              'number': len(pages)})
 
 def error_pages(request):
-    error_pages = SourcePage.objects.exclude(status_code=200)
+    error_pages = SourcePage.objects.all()
+    ok_status_codes = [200, 302]
+    for code in ok_status_codes:
+        error_pages = error_pages.exclude(status_code=code)
+    
     number = len(error_pages)
     return render(request, 'error_pages.html',
             {'error_pages': error_pages,
