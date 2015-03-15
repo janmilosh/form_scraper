@@ -11,7 +11,7 @@ class Helpers:
     def __init__(self):
         pass
         
-    def request_forms_page(self, url):
+    def request_source_page(self, url):
         return requests.get(url)
 
     def get_pdf_links_from_page_response(self, response):

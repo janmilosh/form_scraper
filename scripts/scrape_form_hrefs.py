@@ -9,8 +9,8 @@ class PDFScraper:
         self.helpers = Helpers()
 
     def scrape_pdfs(self):
-        for page in self.pages[6:7]:
-            response = self.helpers.request_forms_page(page.site_url)
+        for page in self.pages[0:1]:
+            response = self.helpers.request_source_page(page.site_url)
             links = self.helpers.get_pdf_links_from_page_response(response)
 
             print page.site_url
