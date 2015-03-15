@@ -15,6 +15,7 @@ class Form(models.Model):
     timestamp = models.DateTimeField('date added')
     last_run = models.DateTimeField(null=True, blank=True)
     status_code = models.PositiveSmallIntegerField(null=True, blank=True)
+    ignore = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
 
 
