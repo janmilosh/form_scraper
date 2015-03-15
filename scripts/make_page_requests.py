@@ -25,9 +25,6 @@ class PageRequests:
             return {'status_code': None,
                     'error_message': e}
 
-    def write_to_csv(self):
-        pass
-
 def run():
     pr = PageRequests()
     pr.update_page_request_data()

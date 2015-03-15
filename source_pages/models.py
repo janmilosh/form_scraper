@@ -16,3 +16,6 @@ class SourcePage(models.Model):
 
     def __unicode__(self):
         return self.site_title
+
+    class Meta:
+        ordering = ('site_title',)
