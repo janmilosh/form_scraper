@@ -14,11 +14,16 @@ class Helpers:
     def request_forms_page(self, url):
         return requests.get(url)
 
-    def make_soup(self, text):
+    def get_pdf_links_from_page_response(self, response):
+        soup = self._make_soup(response.text)
+        forms = self._return_only_pdf_links(soup)
+        return forms
+
+    def _make_soup(self, text):
         soup = BeautifulSoup(text)
         return soup
 
-    def return_only_pdf_links(self, soup):
+    def _return_only_pdf_links(self, soup):
         hrefs = self._find_all_links_in_soup(soup)
         return [href for href in hrefs if re.match('.*\.pdf$', href)] 
 
@@ -33,6 +38,10 @@ class Helpers:
 
     def create_form_name(self, link):
         return link.split('/')[-1]
+
+    def create_canonical_url(self, base_url, href):
+        canonical_url = urljoin(base_url, href) 
+        return canonical_url 
 
     def _request_document(self, base_url, doc_path, days_offset):
         request_parameters = self._make_request_parameters(base_url, doc_path, days_offset)
@@ -70,8 +79,4 @@ class Helpers:
     def _make_time_string_with_days_offset(self, offset_in_days):
         return (datetime.datetime.utcnow() - datetime.timedelta(days=offset_in_days)) \
                     .strftime('%a, %d %b %Y %H:%M:%S GMT')
-
-    def create_canonical_url(self, base_url, href):
-        canonical_url = urljoin(base_url, href) 
-        return canonical_url              
-    
+  
