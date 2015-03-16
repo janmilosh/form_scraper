@@ -2,6 +2,7 @@ from source_pages.models import SourcePage
 
 import requests
 
+
 class PageRequest:
     def __init__(self):
         self.pages = SourcePage.objects.all() 
@@ -24,6 +25,7 @@ class PageRequest:
             print page.site_url, e
             return {'status_code': None,
                     'error_message': e}
+
 
 def run():
     page_request = PageRequest()
