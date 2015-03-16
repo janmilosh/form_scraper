@@ -8,12 +8,12 @@ class PageRequest:
 
     def update_page_request_data(self):        
         for page in self.pages:
-            response = self._request_source_page_header(page)
+            response = self._request_source_page(page)
             page.status_code = response['status_code']
             page.error_message = response['error_message']
             page.save()
 
-    def _request_source_page_header(self, page):
+    def _request_source_page(self, page):
         try:
             response = requests.head(page.site_url)
             print response.status_code, page.site_url

@@ -12,7 +12,7 @@ def index(request):
              'number': len(pages)})
 
 def error_pages(request):
-    error_pages = SourcePage.objects.all()
+    error_pages = SourcePage.objects.order_by('status_code')
     ok_status_codes = [200, 302]
     for code in ok_status_codes:
         error_pages = error_pages.exclude(status_code=code)
