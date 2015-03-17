@@ -7,7 +7,7 @@ from source_pages.models import SourcePage
 
 def index(request):
     pages = SourcePage.objects.order_by('site_title')
-    return render(request, 'index.html',
+    return render(request, 'pages/index.html',
             {'pages': pages,
              'number': len(pages)})
 
@@ -18,6 +18,6 @@ def error_pages(request):
         error_pages = error_pages.exclude(status_code=code)
     
     number = len(error_pages)
-    return render(request, 'error_pages.html',
+    return render(request, 'pages/error_pages.html',
             {'error_pages': error_pages,
              'number': number})
