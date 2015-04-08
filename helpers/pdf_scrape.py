@@ -12,7 +12,10 @@ class Helpers:
         pass
         
     def request_source_page(self, url):
-        return requests.get(url)
+        try:
+            return requests.get(url)
+        except:
+            print "Unable to get: ", url
 
     def get_pdf_links_from_page_response(self, response):
         soup = self._make_soup(response.text)

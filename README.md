@@ -19,3 +19,11 @@ To run script that finds pdf forms on these pages and stores them in the databas
 ```
 $ python manage.py runscript scrape_form_hrefs -v3
 ```
+
+All forms: ```http://localhost:8000/forms/```
+
+Forms that have Etags: ```http://localhost:8000/forms/has_etag/```
+
+All Source pages: ```http://localhost:8000/pages/```
+
+Source pages with status_codes other than 200: ```http://localhost:8000/pages/error_pages/```

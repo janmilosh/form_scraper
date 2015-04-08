@@ -14,7 +14,10 @@ class PDFScraper:
     def scrape_pdfs(self):
         for page in self.pages:
             response = self.helpers.request_source_page(page.site_url)
-            links = self.helpers.get_pdf_links_from_page_response(response)
+            if response:
+                links = self.helpers.get_pdf_links_from_page_response(response)
+            else:
+                links = []
 
             print page.site_url
             print page.site_title

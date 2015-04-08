@@ -10,7 +10,7 @@ class FormRequest:
         self.helpers = Helpers()
 
     def request_forms(self):
-        for index, form in enumerate(self.forms[5000:6000]):
+        for index, form in enumerate(self.forms[8000:9000]):
 
             request_parameters = self.helpers.make_request_parameters(form.canonical_url, 4500)
             try:
@@ -38,21 +38,6 @@ class FormRequest:
             print
             form.save()
                 
-
-            # if response.status_code == requests.codes.not_modified:
-            #     print 'Document has not been modified since {0}, {1}'.format(
-            #                     last_modified,
-            #                     response.status_code)
-                
-            # elif response.status_code == requests.codes.ok:
-            #     print 'Document was modified on {0}, {1}'.format(
-            #                     response.headers['last-modified'],
-            #                     response.status_code)
-            #     etag = response.headers['etag']
-            #     print 'etag: ', etag
-
-            # else:
-            #     print("There was a {0} error on the response".format(response.status_code))
         return response
 
 

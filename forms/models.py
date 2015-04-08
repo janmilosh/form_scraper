@@ -11,6 +11,8 @@ class Form(models.Model):
     canonical_url = models.CharField(max_length=300)
     current_etag = models.CharField(max_length=128, blank=True, default='')
     previous_etag = models.CharField(max_length=128, blank=True, default='')
+    current_sha256 = models.CharField(max_length=128, blank=True, default='')
+    previous_sha256 = models.CharField(max_length=128, blank=True, default='')
     timestamp = models.DateTimeField('date added')
     last_run = models.DateTimeField(null=True, blank=True)
     status_code = models.PositiveSmallIntegerField(null=True, blank=True)
