@@ -16,3 +16,14 @@ def has_etag(request):
     return render(request, 'forms/list_etags.html',
             {'forms': forms,
              'number': len(forms)})
+
+def error_forms(request):
+    error_forms = Form.objects.order_by('status_code')
+    ok_status_codes = [200, 302]
+    for code in ok_status_codes:
+        error_forms = error_forms.exclude(status_code=code)
+    
+    number = len(error_forms)
+    return render(request, 'forms/error_forms.html',
+            {'error_forms': error_forms,
+             'number': number})
