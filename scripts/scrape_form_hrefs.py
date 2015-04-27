@@ -7,7 +7,7 @@ from helpers.pdf_scrape import Helpers
 
 class PDFScraper:
     def __init__(self):
-        self.pages = SourcePage.objects.filter(status_code__in=[200, 302])
+        self.pages = SourcePage.objects.all()
         self.forms = Form.objects.all()
         self.helpers = Helpers()
 
