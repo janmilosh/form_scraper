@@ -9,14 +9,15 @@ class PageRequest:
 
     def update_page_request_data(self):        
         for page in self.pages:
-            response = self._request_source_page(page)
-            page.status_code = response['status_code']
-            page.error_message = response['error_message']
-            page.save()
+            if page.status_code != 200:
+                response = self._request_source_page(page)
+                page.status_code = response['status_code']
+                page.error_message = response['error_message']
+                page.save()
 
     def _request_source_page(self, page):
         try:
-            response = requests.head(page.site_url)
+            response = requests.get(page.site_url)
             print response.status_code, page.site_url
             return {'status_code': response.status_code,
                     'error_message': ''}
