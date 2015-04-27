@@ -1,0 +1,21 @@
+{% if error_forms %}
+  <h1>Forms that return errors: ({{ number }} forms)</h1>    
+  <table>
+    <head>
+      <tr>
+        <td>Status Code</td>
+        <td>Form</a></td>
+      </tr>
+    </head>
+    <tbody>
+      {% for form in error_forms %}    
+        <tr>
+          <td>{{ form.status_code }}</td>
+          <td><a href="{{ form.canonical_url }}">{{ form.file_name }}</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>There were no forms with error_forms.</p>
+{% endif %}
