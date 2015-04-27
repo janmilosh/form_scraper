@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'source_pages',
     'forms',
     'django_extensions',
+    'dbbackup',
 )
 
 MIDDLEWARE_CLASSES = (

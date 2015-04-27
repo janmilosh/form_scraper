@@ -1,3 +1,5 @@
 .DS_Store
 url_files/
 *.pyc
+*/*.pyc
+default.backup
