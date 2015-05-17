@@ -20,7 +20,7 @@ class Ignorer:
                 if word.lower() in form.canonical_url.lower():
                     count += 1
                     form.ignore = True
-                    # form.save()
+                    form.save()
                     print(count, form.canonical_url)
                     
 def run():
@@ -61,6 +61,7 @@ def run():
                 'psychosocial',
                 'instructions',
                 'outpatient',
+                'codification',
 
 
                 )

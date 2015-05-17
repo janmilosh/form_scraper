@@ -14,7 +14,7 @@ class FormWriter:
     '''
 
     def __init__(self):
-        self.forms = Form.objects.filter(status_code=None)
+        self.forms = Form.objects.filter(status_code=None, ignore=False)
 
     def write_to_csv(self):
         print len(self.forms)
