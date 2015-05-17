@@ -17,6 +17,7 @@ class FormWriter:
 
     def write_to_csv(self):
         print len(self.forms)
+        # TODO: make file name/date dynamic
         with open('new_forms_2015_05_17.csv', 'w') as f:
             writer = csv.writer(f)
             for index, form in enumerate(self.forms):

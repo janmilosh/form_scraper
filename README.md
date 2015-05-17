@@ -44,6 +44,12 @@ Periodically, we need to check to see which forms have changed:
 $ python manage.py runscript compare_hashes -v3
 ```
 
+Create a csv of the changed forms:
+
+```
+$ python manage.py runscript write_changed_hashes_to_csv -v3
+```
+
 Routes currently available:
 
 All forms: ```http://localhost:8000/forms/```
