@@ -4,16 +4,27 @@ import requests
 
 
 class PageRequest:
+
+    '''This class contains the method for making the initial
+    request for the pages that contain the form links. The
+    purpose is to determine if the pages have valid url's.
+
+    The run script will run the method: update_page_request_data.
+    The source page's status code or error message will be saved
+    to the database.
+
+    Please see the README.md for instructions on running this script.
+    '''
+
     def __init__(self):
         self.pages = SourcePage.objects.all() 
 
     def update_page_request_data(self):        
         for page in self.pages:
-            if page.status_code != 200:
-                response = self._request_source_page(page)
-                page.status_code = response['status_code']
-                page.error_message = response['error_message']
-                page.save()
+            response = self._request_source_page(page)
+            page.status_code = response['status_code']
+            page.error_message = response['error_message']
+            page.save()
 
     def _request_source_page(self, page):
         try:

@@ -6,8 +6,9 @@ from helpers.pdf_scrape import Helpers
 
 class FormHash:
     def __init__(self):
-        self.forms = Form.objects.filter(current_sha256='', ignore=False)
-
+        self.forms = Form.objects.filter(ignore=False)
+        self.forms = Form.objects.filter(current_sha256='')
+        
     def create_hash(self):
         print 'number of forms with no hash', len(self.forms)
         for index, form in enumerate(self.forms):

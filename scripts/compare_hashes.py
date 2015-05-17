@@ -10,7 +10,7 @@ class FormHash:
         self.forms = Form.objects.exclude(current_sha256='', ignore=True)
 
     def create_hash(self):
-        for index, form in enumerate(self.forms[9000:]):
+        for index, form in enumerate(self.forms[15000:]):
             try:
                 response = requests.get(form.canonical_url)                
                 form_hash = hashlib.sha256(response.content)

@@ -6,6 +6,12 @@ from helpers.pdf_scrape import Helpers
 
 
 class PDFScraper:
+
+    '''This class contains the method for scraping the forms
+    pdf url's from the source pages and saving new forms
+    to the database.
+
+    '''
     def __init__(self):
         self.pages = SourcePage.objects.all()
         self.forms = Form.objects.all()
@@ -38,6 +44,7 @@ class PDFScraper:
         kwargs['canonical_url'] = canonical_url
                 
         if len(self.forms.filter(**kwargs)) == 0:
+            print("**************** SAVING TO DATABASE *****************")
             kwargs['file_name'] = form_name
             kwargs['source_page'] = page
             kwargs['timestamp'] = timezone.now()

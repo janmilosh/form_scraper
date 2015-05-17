@@ -11,7 +11,7 @@
       {% for form in error_forms %}    
         <tr>
           <td>{{ form.status_code }}</td>
-          <td><a href="{{ form.canonical_url }}">{{ form.file_name }}</a></td>
+          <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a></td>
         </tr>
       {% endfor %}
     </tbody>

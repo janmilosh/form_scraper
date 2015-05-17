@@ -6,7 +6,7 @@ from forms.models import Form
 
 
 def index(request):
-    forms = Form.objects.all()
+    forms = Form.objects.exclude(ignore=True)
     return render(request, 'forms/index.html',
             {'forms': forms,
              'number': len(forms)})
