@@ -18,7 +18,7 @@ def has_etag(request):
              'number': len(forms)})
 
 def error_forms(request):
-    error_forms = Form.objects.order_by('status_code')
+    error_forms = Form.objects.order_by('status_code').exclude(ignore=True)
     ok_status_codes = [200, 302]
     for code in ok_status_codes:
         error_forms = error_forms.exclude(status_code=code)

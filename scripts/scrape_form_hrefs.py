@@ -39,9 +39,10 @@ class PDFScraper:
     def _save_pdf_to_database(self, page, form_name, canonical_url):
         '''Saves each pdf for the given page,
         but only if not already in the database.
+        Some forms have trailing whitespace, strip this off.
         '''
         kwargs = {}
-        kwargs['canonical_url'] = canonical_url
+        kwargs['canonical_url'] = canonical_url.rstrip()
                 
         if len(self.forms.filter(**kwargs)) == 0:
             print("**************** SAVING TO DATABASE *****************")

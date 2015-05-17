@@ -13,7 +13,7 @@ class Ignorer:
     def __init__(self):
         self.forms = Form.objects.exclude(ignore=True)
 
-    def ignore_forms(self, keywords):
+    def ignore_forms_with_keywords(self, keywords):
         count = 0
         for form in self.forms:
             for word in keywords:
@@ -22,6 +22,19 @@ class Ignorer:
                     form.ignore = True
                     form.save()
                     print(count, form.canonical_url)
+
+    def ignore_404s(self):
+        count = 0
+        status_codes = (300, 401, 404)
+        # add 403's to these status codes once new, fixed versions of
+        # the urls have been added to the database.
+        for form in self.forms:
+            for status_code in status_codes:
+                if form.status_code == status_code:
+                    count += 1
+                    form.ignore = True
+                    form.save()
+                    print(count, form.status_code, form.canonical_url)
                     
 def run():
     keywords = ('rationale',
@@ -42,6 +55,8 @@ def run():
                 'prescription drug tiers',
                 '4b7026a5beff4156bfedc051f486e81b',
                 'a510490e06f14f3fab558b9def64a063',
+                '827712a15b2545659f88ef3c0a121d31',
+                'ca5ad75a759d42f29c917bae2fd5539f',
                 'pa-guidelines',
                 'pw_e210962',
                 'pw_e210963',
@@ -62,8 +77,15 @@ def run():
                 'instructions',
                 'outpatient',
                 'codification',
+                '40-460',
+                'provider_appeal',
+                'authorization_list',
+                'application_to',
+                'ancillary',
+                'news',
 
 
                 )
     ignorer = Ignorer()
-    ignorer.ignore_forms(keywords)
+    ignorer.ignore_forms_with_keywords(keywords)
+    ignorer.ignore_404s()
