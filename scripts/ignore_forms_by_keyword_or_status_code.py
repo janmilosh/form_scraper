@@ -1,4 +1,4 @@
-import pdb
+import pdb, pickle
 
 from forms.models import Form
 
@@ -12,16 +12,29 @@ class Ignorer:
 
     def __init__(self):
         self.forms = Form.objects.exclude(ignore=True)
+        self.filename = 'scripts/keywords_to_ignore.pkl'
 
-    def ignore_forms_with_keywords(self, keywords):
+        self.keywords = self._read_keywords_from_pickle_file()
+
+    
+    def ignore_forms_with_keywords(self, new_keyword=None, save=False):
         count = 0
+
+        if new_keyword and new_keyword not in self.keywords:
+            self.keywords.append(new_keyword)
+
+        if save:
+            self._write_keywords_to_pickle_file(self.keywords)    
+        
         for form in self.forms:
-            for word in keywords:
+            for word in self.keywords:
                 if word.lower() in form.canonical_url.lower():
                     count += 1
-                    form.ignore = True
-                    # form.save()
                     print(count, form.canonical_url)
+                    if save:
+                        form.ignore = True
+                        form.save()
+                        print 'This form was ignored.'
 
     def ignore_404s(self):
         count = 0
@@ -35,61 +48,34 @@ class Ignorer:
                     form.ignore = True
                     # form.save()
                     print(count, form.status_code, form.canonical_url)
+
+    
+    def _write_keywords_to_pickle_file(self, keywords):
+        pkl_file = open(self.filename, 'wb')
+        pickle.dump(keywords, pkl_file)
+        pkl_file.close()
+
+    def _read_keywords_from_pickle_file(self):
+        pkl_file = open(self.filename, 'rb')
+        keywords = pickle.load(pkl_file)
+        pkl_file.close()
+        return keywords
+
                     
-def run():
-    keywords = ('rationale',
-                'BlueSaludFormularyUpdates',
-                'mmp_formulary',
-                'classic_formulary',
-                'eg_formulary',
-                'jade_formulary',
-                'benefit-limit-exception',
-                'MCP_Formulary_508',
-                'AlpCarHydCombo.pdf',
-                'Medicaid_News',
-                'web_announcement',
-                'non_claim_remit_cost_share',
-                'provider_taxonomy_guide',
-                'benefit chart',
-                'druglist',
-                'prescription drug tiers',
-                '4b7026a5beff4156bfedc051f486e81b',
-                'a510490e06f14f3fab558b9def64a063',
-                '827712a15b2545659f88ef3c0a121d31',
-                'ca5ad75a759d42f29c917bae2fd5539f',
-                'pa-guidelines',
-                'pw_e210962',
-                'pw_e210963',
-                'Publications',
-                'Transportation',
-                'coordination',
-                'administrative',
-                'billing',
-                'notification',
-                'immunization',
-                'hysterectomy',
-                'behavioral',
-                'behavorial',
-                'admission',
-                'data',
-                'disclosure',
-                'psychosocial',
-                'instructions',
-                'outpatient',
-                'codification',
-                '40-460',
-                'provider_appeal',
-                'authorization_list',
-                'application_to',
-                'ancillary',
-                'news',
-                'manual',
-                'taxonomy',
-                'announcement',
-                'criteria',
-
-
-                )
+def run(*args):
+    '''
+    Pass arguments to runscript to indicate keyword as a string and if save add an s:
+    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='formulary change update' s
+    '''
     ignorer = Ignorer()
-    ignorer.ignore_forms_with_keywords(keywords)
-    ignorer.ignore_404s()
+    new_keyword = None
+    save = False
+    
+    if args:
+        new_keyword = args[0]
+        
+        if len(args) == 2 and args[1] == 's':
+            save = True
+
+    ignorer.ignore_forms_with_keywords(new_keyword=new_keyword, save=save)
+    # ignorer.ignore_404s()
