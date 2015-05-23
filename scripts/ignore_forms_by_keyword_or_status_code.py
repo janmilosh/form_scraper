@@ -20,7 +20,7 @@ class Ignorer:
                 if word.lower() in form.canonical_url.lower():
                     count += 1
                     form.ignore = True
-                    form.save()
+                    # form.save()
                     print(count, form.canonical_url)
 
     def ignore_404s(self):
@@ -33,7 +33,7 @@ class Ignorer:
                 if form.status_code == status_code:
                     count += 1
                     form.ignore = True
-                    form.save()
+                    # form.save()
                     print(count, form.status_code, form.canonical_url)
                     
 def run():
@@ -83,6 +83,10 @@ def run():
                 'application_to',
                 'ancillary',
                 'news',
+                'manual',
+                'taxonomy',
+                'announcement',
+                'criteria',
 
 
                 )

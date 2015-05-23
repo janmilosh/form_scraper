@@ -18,6 +18,7 @@ class Form(models.Model):
     status_code = models.PositiveSmallIntegerField(null=True, blank=True)
     ignore = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
+    last_run_index = models.PositiveSmallIntegerField(null=True, blank=True)
 
 
     def __unicode__(self):
@@ -25,3 +26,17 @@ class Form(models.Model):
 
     class Meta:
         ordering = ('source_page', 'file_name',)
+
+
+class Hash(models.Model):
+    sha256 = models.CharField(max_length=128)
+    last_run = models.DateTimeField('last run')
+    form = models.ForeignKey(Form)
+    last_run_index = models.PositiveSmallIntegerField(null=True, blank=True)
+
+
+    def __unicode__(self):
+        return self.sha256
+
+    class Meta:
+        ordering = ('last_run',)

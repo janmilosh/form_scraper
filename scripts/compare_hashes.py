@@ -12,7 +12,7 @@ class FormHash:
     def create_hash(self):
         for index, form in enumerate(self.forms[15000:]):
             try:
-                response = requests.get(form.canonical_url)                
+                response = requests.get(form.canonical_url)            
                 form_hash = hashlib.sha256(response.content)
                 form.previous_sha256 = form.current_sha256
                 form.current_sha256 = form_hash.hexdigest()
