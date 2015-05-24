@@ -19,6 +19,7 @@ class Form(models.Model):
     ignore = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
     last_run_index = models.PositiveSmallIntegerField(null=True, blank=True)
+    form_numbers = models.CharField(max_length=128, blank=True, default='')
 
 
     def __unicode__(self):
