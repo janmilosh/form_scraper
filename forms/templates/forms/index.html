@@ -11,7 +11,7 @@
       {% for form in forms %}  
         
         <tr>
-          <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a></td>
+          <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a> {{ form.form_numbers }}</td>
         </tr>
       {% endfor %}
     </tbody>
