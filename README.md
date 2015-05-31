@@ -29,7 +29,13 @@ $ python manage.py runscript create_hash -v3
 We need to filter out those forms that aren't of interest:
 
 ```
-$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3
+$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='medicaremailorder'
+```
+
+To then filter out the forms and mark them as 'ignore' in the database: 
+
+```
+$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='medicaremailorder' s
 ```
 
 This is a good time to create a csv of the forms that have just been added to the database:

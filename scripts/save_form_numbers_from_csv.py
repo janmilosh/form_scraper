@@ -21,6 +21,18 @@ class FormNumber:
                 try:
                     form = forms[0]
                     form.form_numbers = row['FORM #']
+                    print form.form_numbers, form.canonical_url
+                    print
+
+                    '''In this section, add string that corresponds to
+                    the comment in the FORM CHANGED? field for a form to
+                    eliminate. Add additional strings as needed
+                    '''
+
+                    if 'not a prescription' in row['FORM CHANGED?'].lower():
+                        form.ignore = True
+                        print form.canonical_url, '****************', row['FORM CHANGED?'], '***************'
+
                     form.save()
                 except:
                     pass
