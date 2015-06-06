@@ -30,7 +30,7 @@ class Ignorer:
             for word in self.keywords:
                 if word.lower() in form.canonical_url.lower():
                     count += 1
-                    print(count, form.canonical_url)
+                    print(count, word, form.canonical_url)
                     if save:
                         form.ignore = True
                         form.save()
