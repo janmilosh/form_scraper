@@ -6,12 +6,12 @@ from forms.models import Form, Hash
 class HashComparer:
     def __init__(self):
         self.forms = Form.objects.exclude(ignore=True)
-        self.run_index = 1
+        self.run_index = 2
 
 
     def write_to_csv(self):
         # TODO: make file name/date dynamic
-        with open('changed_forms_2015_05_23.csv', 'w') as f:
+        with open('changed_forms_2015_06_06.csv', 'w') as f:
             writer = csv.writer(f)
             for index, form in enumerate(self.forms):
                 if self._changed_hashes(form):
