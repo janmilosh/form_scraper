@@ -13,12 +13,12 @@ class FormWriter:
     '''
 
     def __init__(self):
-        self.forms = Form.objects.filter(previous_sha256='', ignore=False)
+        self.forms = Form.objects.filter(status_code=None, ignore=False)
 
     def write_to_csv(self):
         print len(self.forms)
         # TODO: make file name/date dynamic
-        with open('new_forms_2015_05_17.csv', 'w') as f:
+        with open('new_forms_2015_05_31.csv', 'w') as f:
             writer = csv.writer(f)
             for index, form in enumerate(self.forms):
                 try:
