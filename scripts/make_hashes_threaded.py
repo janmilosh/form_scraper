@@ -23,6 +23,7 @@ class FormHash:
         self.run_index = this_run_index
         self.count = 0
 
+
     def process_forms(self, forms):
         '''http://www.troyfawkes.com/learn-python-multithreading-queues-basics/'''
         def process_loop(form):
@@ -63,7 +64,6 @@ class FormHash:
   
 
     def _get_hash(self, form):
-
         try:               
             response = requests.get(form.canonical_url, timeout=30) 
 
