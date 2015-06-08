@@ -6,7 +6,7 @@ class FormNumber:
 
     def __init__(self):
         '''Replace with correct filename in root directory.'''
-        self.filename = 'some_file_from_forms_team.csv'
+        self.filename = 'changed_form_report_052615.csv'
 
     def read_csv_to_dict(self):
         '''
@@ -32,11 +32,11 @@ class FormNumber:
                     eliminate. Add additional strings as needed
                     '''
 
-                    if 'not a pa' in row['FORM CHANGED?'].lower():
+                    if '404' in row['FORM CHANGED?'].lower():
                         form.ignore = True
                         print form.canonical_url, '****************', row['FORM CHANGED?'], '***************'
 
-                    # form.save()
+                    form.save()
                 except:
                     pass
 
