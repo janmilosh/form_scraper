@@ -1,24 +1,29 @@
-{% if pages %}
-  <h1>All pages ({{ number }})</h1>    
-  <table>
-    <head>
-      <tr>
-        <td>Site Title/URL</td>
-        <td>Status Code</td>
-      </tr>
-    </head>
-    <tbody>
-      {% for page in pages %}  
+{% extends 'site_base.html' %}
+
+{% block content %}
+
+  {% if pages %}
+    <h1>All pages ({{ number }})</h1>    
+    <table>
+      <thead>
         <tr>
-          <td>{{ page.site_title }}</td>
-          <td>{{ page.status_code }}</td>
+          <th>Site Title/URL</th>
+          <th>URL</th>
+          <th class="text-center">Status Code</th>
         </tr>
-        <tr>
-          <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>There were no pages with pages.</p>
-{% endif %}
+      </thead>
+      <tbody>
+        {% for page in pages %}  
+          <tr>
+            <td>{{ page.site_title }}</td>
+            <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
+            <td class="text-center">{{ page.status_code }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There were no pages with pages.</p>
+  {% endif %}
+
+{% endblock %}

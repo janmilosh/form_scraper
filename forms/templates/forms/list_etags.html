@@ -1,23 +1,27 @@
-{% if forms %}
-  <h1>Forms with etags: ({{ number }})</h1>    
-  <table>
-    <head>
-      <tr>
-        <td>Form Name</td>
-        <td>Current Etag</td>
-      </tr>
-    </head>
-    <tbody>
-      {% for form in forms %}  
-        
-        <tr>
-          <td><a href="{{ form.canonical_url }}">{{ form.file_name }}</a></td>
-          <td>{{ form.current_etag }}</td>
-        </tr>
+{% extends 'site_base.html' %}
 
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>There were no forms with etags.</p>
-{% endif %}
+{% block content %}
+  {% if forms %}
+    <h1>Forms with etags: ({{ number }})</h1>    
+    <table>
+      <thead>
+        <tr>
+          <th>Form Name</th>
+          <th>Current Etag</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in forms %}  
+          
+          <tr>
+            <td><a href="{{ form.canonical_url }}">{{ form.file_name }}</a></td>
+            <td>{{ form.current_etag }}</td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There were no forms with etags.</p>
+  {% endif %}
+{% endblock %}

@@ -1,23 +1,27 @@
-{% if error_pages %}
-  <h1>Pages that return errors ({{ number }} pages)</h1>    
-  <table>
-    <head>
-      <tr>
-        <td>Site Title</td>
-        <td>Status Code</td>
-        <td>Site URL</a></td>
-      </tr>
-    </head>
-    <tbody>
-      {% for page in error_pages %}    
+{% extends 'site_base.html' %}
+
+{% block content %}
+  {% if error_pages %}
+    <h1>Pages that return errors ({{ number }} pages)</h1>    
+    <table>
+      <thead>
         <tr>
-          <td>{{ page.site_title }}</td>
-          <td>{{ page.status_code }}</td>
-          <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
+          <th>Site Title</th>
+          <th>Site URL</a></th>
+          <th class="text-center">Status Code</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>There were no pages with error_pages.</p>
-{% endif %}
+      </thead>
+      <tbody>
+        {% for page in error_pages %}    
+          <tr>
+            <td>{{ page.site_title }}</td>
+            <td><a href="{{ page.site_url }}" title="{{ page.site_title }}">{{ page.site_url }}</a></td>
+            <td class="text-center">{{ page.status_code }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There were no pages with error_pages.</p>
+  {% endif %}
+{% endblock %}

@@ -1,21 +1,25 @@
-{% if forms %}
-  <h1>All forms ({{ number }})</h1>    
-  <table>
-    <head>
-      <tr>
-        <td>Form Url</td>
-        
-      </tr>
-    </head>
-    <tbody>
-      {% for form in forms %}  
-        
+{% extends 'site_base.html' %}
+
+{% block content %}
+  {% if forms %}
+    <h1>All forms ({{ number }})</h1>    
+    <table>
+      <thead>
         <tr>
-          <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a> <span style="color: white; background: blue;">{{ form.form_numbers }}</span></td>
+          <th>Form Url</th>
+          
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>There were no forms.</p>
-{% endif %}
+      </thead>
+      <tbody>
+        {% for form in forms %}  
+          
+          <tr>
+            <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a> <span style="color: white; background: blue;">{{ form.form_numbers }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There were no forms.</p>
+  {% endif %}
+{% endblock %}
