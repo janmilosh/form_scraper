@@ -1,8 +1,11 @@
 {% extends 'site_base.html' %}
+{% load humanize %}
+
+{% block error_pages_active %}class="active"{% endblock %}
 
 {% block content %}
   {% if error_pages %}
-    <h1>Pages that return errors ({{ number }} pages)</h1>    
+    <h2>Pages that return errors: {{ number|intcomma }} total</h2>
     <table>
       <thead>
         <tr>

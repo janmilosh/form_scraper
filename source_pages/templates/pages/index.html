@@ -1,9 +1,12 @@
 {% extends 'site_base.html' %}
+{% load humanize %}
+
+{% block pages_active %}class="active"{% endblock %}
 
 {% block content %}
 
   {% if pages %}
-    <h1>All pages ({{ number }})</h1>    
+    <h2>All source pages: {{ number|intcomma }} total</h2>    
     <table>
       <thead>
         <tr>

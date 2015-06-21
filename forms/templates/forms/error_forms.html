@@ -1,8 +1,11 @@
 {% extends 'site_base.html' %}
+{% load humanize %}
+
+{% block error_forms_active %}class="active"{% endblock %}
 
 {% block content %}  
   {% if error_forms %}
-    <h1>Forms that return errors: ({{ number }} forms)</h1>    
+    <h2>Forms that return errors: {{ number|intcomma }} total</h2>    
     <table>
       <thead>
         <tr>
@@ -20,6 +23,6 @@
       </tbody>
     </table>
   {% else %}
-    <p>There were no forms with error_forms.</p>
+    <h2>There were no forms with errors.</h2>
   {% endif %}
 {% endblock %}

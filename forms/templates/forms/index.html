@@ -1,9 +1,12 @@
 {% extends 'site_base.html' %}
+{% load humanize %}
+
+{% block forms_active %}class="active"{% endblock %}
 
 {% block content %}
   {% if forms %}
-    <h1>All forms ({{ number }})</h1>    
-    <table>
+    <h2>All forms: {{ number|intcomma }} total</h2>    
+    <table class="long-url">
       <thead>
         <tr>
           <th>Form Url</th>
