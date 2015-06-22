@@ -14,7 +14,7 @@ class SourcePage(models.Model):
     notes = models.TextField(blank=True)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.site_title
 
     class Meta:

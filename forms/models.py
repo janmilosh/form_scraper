@@ -22,7 +22,7 @@ class Form(models.Model):
     form_numbers = models.CharField(max_length=128, blank=True, default='')
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.file_name
 
     class Meta:
@@ -36,7 +36,7 @@ class Hash(models.Model):
     last_run_index = models.PositiveSmallIntegerField(null=True, blank=True)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.sha256
 
     class Meta:
