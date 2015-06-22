@@ -8,6 +8,37 @@ To run server:
 $ python manage.py runserver
 ```
 
+To start Python3 virtual environment:
+
+```
+$ workon form_scraper3
+```
+
+To backup database:
+
+```
+$ python manage.py dbbackup
+```
+
+To drop database:
+
+```
+$ dropdb formdata
+```
+
+To restore database from backup (clean start):
+
+```
+$ createdb formdata
+$ psql formdata < db_2015_06_21.backup
+```
+
+To get commands on brew postgres:
+
+```
+$ brew info postgres
+```
+
 To run script that makes page requests (do this after new source pages are added to the database):
 
 ```
@@ -20,40 +51,28 @@ To run script that finds pdf forms on these pages and stores them in the databas
 $ python manage.py runscript scrape_form_hrefs -v3
 ```
 
-After scraping the forms, we need to get the initial hashes and status codes:
+After scraping the forms, we need to get the hashes for this run (set run version in __init__):
 
 ```
-$ python manage.py runscript create_hash -v3
+$ python manage.py runscript make_hashes_threaded -v3
 ```
 
 We need to filter out those forms that aren't of interest:
 
 ```
-$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='medicaremailorder'
+$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=check 'medicaremailorder'
 ```
 
 To then filter out the forms and mark them as 'ignore' in the database: 
 
 ```
-$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='medicaremailorder' s
-```
-
-This is a good time to create a csv of the forms that have just been added to the database:
-
-```
-$ python manage.py runscript write_new_form_urls_to_csv -v3
-```
-
-Periodically, we need to check to see which forms have changed:
-
-```
-$ python manage.py runscript compare_hashes -v3
+$ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=save 'medicaremailorder'
 ```
 
 Create a csv of the changed forms:
 
 ```
-$ python manage.py runscript write_changed_hashes_to_csv -v3
+$ python manage.py runscript compare_hashes_and_write_to_csv -v3
 ```
 
 Routes currently available:
