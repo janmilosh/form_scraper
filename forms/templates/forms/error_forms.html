@@ -9,15 +9,15 @@
     <table>
       <thead>
         <tr>
-          <th class="text-center">Status Code</th>
           <th>Form</a></th>
+          <th class="text-center">Status Code</th>
         </tr>
       </thead>
       <tbody>
         {% for form in error_forms %}    
           <tr>
-            <td>{{ form.status_code }}</td>
-            <td><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a></td>
+            <td class="med-url"><a href="{{ form.canonical_url }}">{{ form.canonical_url }}</a></td>
+            <td class="text-center">{{ form.status_code }}</td>
           </tr>
         {% endfor %}
       </tbody>

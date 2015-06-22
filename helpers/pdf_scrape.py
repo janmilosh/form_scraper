@@ -1,5 +1,5 @@
 import datetime, os, re
-from urlparse import urljoin
+from urllib.parse import urljoin
 from contextlib import closing
 import pdb 
 
@@ -15,7 +15,7 @@ class Helpers:
         try:
             return requests.get(url)
         except:
-            print "Unable to get: ", url
+            print("Unable to get: ", url)
 
     def get_pdf_links_from_page_response(self, response):
         soup = self._make_soup(response.text)

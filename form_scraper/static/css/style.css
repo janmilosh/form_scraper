@@ -10,3 +10,7 @@ th, td {
 .long-url td {
   max-width: 1000px;
 }
+
+.med-url {
+  max-width: 887px;
+}

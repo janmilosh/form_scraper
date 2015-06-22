@@ -25,15 +25,15 @@ class PDFScraper:
             else:
                 links = []
 
-            print page.site_url
-            print page.site_title
-            print links
+            print(page.site_url)
+            print(page.site_title)
+            print(links)
 
             for link in links:
                 form_name = self.helpers.create_form_name(link)
                 canonical_url = self.helpers.create_canonical_url(page.site_url, link)
-                print form_name
-                print canonical_url
+                print(form_name)
+                print(canonical_url)
                 self._save_pdf_to_database(page, form_name, canonical_url)
 
     def _save_pdf_to_database(self, page, form_name, canonical_url):

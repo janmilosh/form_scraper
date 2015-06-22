@@ -1,6 +1,8 @@
-from source_pages.models import SourcePage
+import sys
 
 import requests
+
+from source_pages.models import SourcePage
 
 
 class PageRequest:
@@ -17,7 +19,8 @@ class PageRequest:
     '''
 
     def __init__(self):
-        self.pages = SourcePage.objects.all() 
+        self.pages = SourcePage.objects.all()
+        # self.pages = SourcePage.objects.filter(status_code=None) 
 
     def update_page_request_data(self):        
         for page in self.pages:
@@ -29,14 +32,14 @@ class PageRequest:
     def _request_source_page(self, page):
         try:
             response = requests.get(page.site_url)
-            print response.status_code, page.site_url
+            print(response.status_code, page.site_url)
             return {'status_code': response.status_code,
                     'error_message': ''}
         
-        except BaseException, e:
-            print page.site_url, e
+        except:
+            print(page.site_url, str(sys.exc_info()[0]))
             return {'status_code': None,
-                    'error_message': e}
+                    'error_message': str(sys.exc_info()[0])}
 
 
 def run():

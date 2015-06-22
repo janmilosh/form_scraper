@@ -34,7 +34,7 @@ class Ignorer:
                     if save:
                         form.ignore = True
                         form.save()
-                        print 'This form was ignored.'
+                        print('This form was ignored.')
 
     def ignore_404s(self):
         count = 0
@@ -46,7 +46,7 @@ class Ignorer:
                 if form.status_code == status_code:
                     count += 1
                     form.ignore = True
-                    # form.save()
+                    form.save()
                     print(count, form.status_code, form.canonical_url)
 
     
@@ -64,18 +64,24 @@ class Ignorer:
                     
 def run(*args):
     '''
-    Pass arguments to runscript to indicate keyword as a string and if save add an s:
-    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args='formulary change update' s
+    Pass arguments to runscript to indicate keyword as a string and if save add an save as first arg,
+    otherwise add check as first argument:
+    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=check 'formulary change update'
+    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=save 'formulary change update'
+    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=check
+    $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=save
     '''
     ignorer = Ignorer()
     new_keyword = None
     save = False
     
     if args:
-        new_keyword = args[0]
+        if len(args) == 2:
+            new_keyword = args[1]
         
-        if len(args) == 2 and args[1] == 's':
+        if args[0] == 'save':
             save = True
 
-    ignorer.ignore_forms_with_keywords(new_keyword=new_keyword, save=save)
-    # ignorer.ignore_404s()
+
+    # ignorer.ignore_forms_with_keywords(new_keyword=new_keyword, save=save)
+    ignorer.ignore_404s()

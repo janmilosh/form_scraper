@@ -4,13 +4,9 @@ Django==1.7.5
 django-dbbackup==2.0.4
 django-extensions==1.5.1
 ecdsa==0.13
-gevent==1.0.1
-greenlet==0.4.5
-grequests==0.2.0
 paramiko==1.15.2
 pdb==0.1
 psycopg2==2.6
-pycrypto==2.6.1
 pysftp==0.2.8
 python-gnupg==0.3.7
 PyYAML==3.11
