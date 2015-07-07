@@ -6,7 +6,7 @@ class FormNumber:
 
     def __init__(self):
         '''Replace with correct filename in root directory.'''
-        self.filename = 'changed_form_report_052615.csv'
+        self.filename = 'changed_form_report_070115.csv'
 
     def read_csv_to_dict(self):
         '''
@@ -17,24 +17,40 @@ class FormNumber:
         with open(self.filename) as csvfile:
             form_dicts = csv.DictReader(csvfile)
             for index, row in enumerate(form_dicts):
+                print index,
                 forms = Form.objects.filter(canonical_url=row['URL'])
                 try:
                     form = forms[0]
                     '''uncomment 3 lines below for adding form
                     numbers to database
                     '''
-                    # form.form_numbers = row['FORM #']
-                    # print form.form_numbers, form.canonical_url
-                    # print
+                    if row['FORM #'] != 'NEW':
+                        form.form_numbers = row['FORM #']
+                        print form.form_numbers, form.canonical_url
+                        print
 
                     '''In this section, add string that corresponds to
-                    the comment in the FORM CHANGED? field for a form to
+                    the comment in the NOTES field for a form to
                     eliminate. Add additional strings as needed
                     '''
+                    ignore_comments = (
+                        'Not a PA',
+                        'ERROR',
+                        'Repeat of above',
+                        'Redirects to Accredo drug info page',
+                        'Redirects to referral search page',
+                        'Redirects to Accredo home page',
+                        )
+                    for comment in ignore_comments:
 
-                    if '404' in row['FORM CHANGED?'].lower():
-                        form.ignore = True
-                        print form.canonical_url, '****************', row['FORM CHANGED?'], '***************'
+                        if comment in row['NOTES']:
+                            form.ignore = True
+                            print form.canonical_url, '****************', row['NOTES'], '***************'
+
+
+                    # if '404' in row['FORM CHANGED?'].lower():
+                    #     form.ignore = True
+                    #     print form.canonical_url, '****************', row['FORM CHANGED?'], '***************'
 
                     form.save()
                 except:

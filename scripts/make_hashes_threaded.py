@@ -15,7 +15,7 @@ class FormHash:
         '''Form objects must be put into a list so that
         they can be randomized.
         '''
-        this_run_index = 3
+        this_run_index = 4
         forms = Form.objects.exclude(ignore=True).exclude(last_run_index=this_run_index)
         self.forms =list(forms) 
         random.shuffle(self.forms)
@@ -66,7 +66,7 @@ class FormHash:
 
     def _get_hash(self, form):
         try:               
-            response = requests.get(form.canonical_url, timeout=30) 
+            response = requests.get(form.canonical_url, timeout=30, verify=False) 
 
             if response.ok:
                 print('The response is ok:', response.ok)               
