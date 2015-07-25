@@ -38,7 +38,7 @@ class Ignorer:
 
     def ignore_404s(self):
         count = 0
-        status_codes = (500, 404)
+        status_codes = (404, 401)
         # add 403's to these status codes once new, fixed versions of
         # the urls have been added to the database.
         for form in self.forms:
@@ -64,7 +64,7 @@ class Ignorer:
                     
 def run(*args):
     '''
-    Pass arguments to runscript to indicate keyword as a string and if save add an save as first arg,
+    Pass arguments to runscript to indicate keyword as a string and if save add save as first arg,
     otherwise add check as first argument:
     $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=check 'formulary change update'
     $ python manage.py runscript ignore_forms_by_keyword_or_status_code -v3 --script-args=save 'formulary change update'

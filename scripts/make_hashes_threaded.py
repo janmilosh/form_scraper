@@ -15,7 +15,7 @@ class FormHash:
         '''Form objects must be put into a list so that
         they can be randomized.
         '''
-        this_run_index = 4
+        this_run_index = 5
         forms = Form.objects.exclude(ignore=True).exclude(last_run_index=this_run_index)
         self.forms =list(forms) 
         random.shuffle(self.forms)
