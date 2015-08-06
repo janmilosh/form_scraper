@@ -19,8 +19,9 @@ class PageRequest:
     '''
 
     def __init__(self):
-        self.pages = SourcePage.objects.all()
-        # self.pages = SourcePage.objects.filter(status_code=None) 
+        # self.pages = SourcePage.objects.exclude(notes='discontinue')
+        self.pages = SourcePage.objects.filter(status_code=None) 
+
 
     def update_page_request_data(self):        
         for page in self.pages:
@@ -31,7 +32,7 @@ class PageRequest:
 
     def _request_source_page(self, page):
         try:
-            response = requests.get(page.site_url)
+            response = requests.get(page.site_url, timeout=30, verify=False)
             print(response.status_code, page.site_url)
             return {'status_code': response.status_code,
                     'error_message': ''}

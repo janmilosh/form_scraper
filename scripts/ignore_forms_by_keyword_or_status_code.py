@@ -38,7 +38,7 @@ class Ignorer:
 
     def ignore_404s(self):
         count = 0
-        status_codes = (404, 401)
+        status_codes = (404, 401, 400, 403, 410, 500, None)
         # add 403's to these status codes once new, fixed versions of
         # the urls have been added to the database.
         for form in self.forms:
@@ -84,5 +84,5 @@ def run(*args):
 
 
     ignorer.ignore_forms_with_keywords(new_keyword=new_keyword, save=save)
-    # ignorer.ignore_404s()
+    ignorer.ignore_404s()
     
